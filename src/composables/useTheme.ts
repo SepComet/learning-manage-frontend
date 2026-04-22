@@ -7,8 +7,8 @@ export type ResolvedTheme = 'light' | 'dark' | 'blue' | 'green' | 'brown' | 'pin
 
 export const THEME_STORAGE_KEY = CACHE_REGISTRY.themeMode.key
 
-const themeModeRef = ref<ThemeMode>('light')
-const resolvedThemeRef = ref<ResolvedTheme>('light')
+const themeModeRef = ref<ThemeMode>('brown')
+const resolvedThemeRef = ref<ResolvedTheme>('brown')
 
 const isThemeMode = (value: string | null): value is ThemeMode =>
   value === 'light' || value === 'dark' || value === 'blue' || value === 'green' || value === 'brown' || value === 'pink'
@@ -17,23 +17,23 @@ const isBrowser = () => typeof window !== 'undefined' && typeof document !== 'un
 
 const readStoredThemeMode = (): { mode: ThemeMode; needsRepair: boolean } => {
   if (!isBrowser()) {
-    return { mode: 'light', needsRepair: false }
+    return { mode: 'brown', needsRepair: false }
   }
 
   try {
     const stored = readThemeModeCache()
     if (stored === null) {
-      return { mode: 'light', needsRepair: false }
+      return { mode: 'brown', needsRepair: false }
     }
 
     if (isThemeMode(stored)) {
       return { mode: stored, needsRepair: false }
     }
   } catch {
-    return { mode: 'light', needsRepair: false }
+    return { mode: 'brown', needsRepair: false }
   }
 
-  return { mode: 'light', needsRepair: true }
+  return { mode: 'brown', needsRepair: true }
 }
 
 const writeStoredThemeMode = (mode: ThemeMode) => {
